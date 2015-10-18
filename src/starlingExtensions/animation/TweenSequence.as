@@ -17,6 +17,12 @@ import utils.Range;
 import utils.TimeOut;
 import utils.Utils;
 
+/**
+ * A sequence of Tween instances played in a the order you push them.
+ * IMPORTANT !!!!!!
+ * Do not set Tween.onComplete listeners.
+ * Use TweenSequence.EVENT_TWEEN_COMPLETE event instead
+ */
 public dynamic class TweenSequence extends Array {
     public var name:String = "";
 
@@ -105,6 +111,7 @@ public dynamic class TweenSequence extends Array {
 
     public function goToAndPlay(tweenIndex:int, reversible:Boolean = false, loop:Boolean = false):void {
         _tweenIndex = tweenIndex;
+        Handlers.call(EVENT_SEQUENCE_START);
         play(reversible, loop);
     }
 
@@ -154,6 +161,7 @@ public dynamic class TweenSequence extends Array {
 
     public var EVENT_TWEEN_START:Object = {};
     public var EVENT_TWEEN_STOP:Object = {};
+    public var EVENT_TWEEN_COMPLETE:Object = {};
     public var EVENT_TWEEN_PAUSE:Object = {};
     public var EVENT_TWEEN_UPDATE:Object = {};
     public var EVENT_TWEEN_CHANGED:Object = {};
@@ -191,6 +199,9 @@ public dynamic class TweenSequence extends Array {
 
         juggler.remove(tween);
 
+        Handlers.call(EVENT_TWEEN_COMPLETE);
+        Handlers.call(tween);
+
         if (_tweenIndex + 1 < this.length) {
             _tweenIndex++;
             play(_playReversible, _loop);
@@ -207,6 +218,7 @@ public dynamic class TweenSequence extends Array {
         }
     }
 
+    public var EVENT_SEQUENCE_START:Object = {};
     public var EVENT_SEQUENCE_COMPLETE:Object = {};
     public var sequenceCompleteHandler:Function;
 
