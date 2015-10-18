@@ -20,7 +20,7 @@ import utils.Utils;
 /**
  * A sequence of Tween instances played in a the order you push them.
  * IMPORTANT !!!!!!
- * Do not set Tween.onComplete listeners.
+ * Do not set Tween.onComplete listener for pushed tweens because it is used internally by this class.
  * Use TweenSequence.EVENT_TWEEN_COMPLETE event instead
  */
 public dynamic class TweenSequence extends Array {
