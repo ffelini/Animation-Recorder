@@ -9,7 +9,7 @@
               <dependency linkage="Include" />
             </entry>
             <entry module-name="ReflectionUtils1" build-configuration-name="ReflextionUtils">
-              <dependency linkage="Merged" />
+              <dependency linkage="Include" />
             </entry>
           </entries>
           <sdk name="4.6.0 AIR 14" />
